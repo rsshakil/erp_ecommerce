@@ -38,7 +38,7 @@ class PurchaseController extends Controller
         $this->request= $request;
         $search = $this->request->search;
         $dataSorting = $this->request->sorting == 'false'?10:$this->request->sorting;
-        $data =$search == 'false'?Purchase::orderBy('purchases_id', 'desc')->paginate($dataSorting):Purchase::where(function($query) use($search){
+        $data =$search == 'false'?Purchase::Where('client_id', $this->request->client_id)->orderBy('purchases_id', 'desc')->paginate($dataSorting):Purchase::where(function($query) use($search){
             $query->orWhere('invoice_no', 'LIKE', "%{$search}%");
         })->Where('client_id', $this->request->client_id)->orderBy('purchases_id', 'desc')->paginate($dataSorting);
         return PurchaseResource::collection($data);
