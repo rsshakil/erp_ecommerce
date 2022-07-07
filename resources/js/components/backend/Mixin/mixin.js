@@ -327,7 +327,7 @@ export default {
 
                 })
                 .catch(error => {
-                    alert('errorOccurrred');
+                    console.log('errorOccurrred');
                     if (error.response !== undefined && error.response.status == 422) {
                         this.errors = error.response.data.errors;
                     } else {
