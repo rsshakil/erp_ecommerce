@@ -20,10 +20,10 @@ class ProductcategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //
-        $result = product_category::where('status','1')->groupBy('category_name')->get();
+        $result = product_category::where('status','1')->where('client_id',$request->client_id)->groupBy('category_name')->get();
         return response()->json(['category_list'=>$result]);
     }
 

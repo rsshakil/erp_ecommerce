@@ -45,11 +45,11 @@
                  <tr v-for="(product, i) in product_list_arr" :key="i">
                     <td style="vertical-align:middle">{{(i+1)}}</td>
                     <td style="vertical-align:middle">
-                      <img v-if="product.image!=null" style="width:100px;height:60px" class="product_image_list" :src="BASE_URL+'/public/images/products/'+product.image"/>
+                      <img v-if="product.item_img!=null" style="width:100px;height:60px" class="product_image_list" :src="BASE_URL+'/public/images/products/'+product.item_img"/>
                       <img v-else class="product_image_list" style="width:100px;height:60px" :src="BASE_URL+'/public/images/products/no-product-image.png'"/>
                       </td>
-                    <td style="vertical-align:middle">{{product.product_name}}</td>
-                    <td style="vertical-align:middle">{{product.category_name}}</td>
+                    <td style="vertical-align:middle">{{product.item_name}}</td>
+                    <td style="vertical-align:middle">{{product.item_cat}}</td>
                     <td style="vertical-align:middle;text-align: right;">৳{{product.item_selling_price}}</td>
                     <td style="vertical-align:middle;text-align: right;"><input class="form-control" style="border:none;background:transparent;text-align: right;" type="number" v-model="product.item_quantity" value="product.item_quantity"></td>
                     

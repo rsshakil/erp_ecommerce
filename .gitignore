@@ -2,7 +2,7 @@
 /node_modules
 /public/hot
 /public/storage
-
+/public/js/app.js
 public/backend/images/users/*
 public/dashboard/images/*
 

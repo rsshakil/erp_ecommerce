@@ -25,9 +25,8 @@
                     <th style="width:200px;">Image</th>
                     <th >{{myLang.product_code}}</th>
                     <th>Name</th>
-                    <th>Cost price</th>
                     <th>Caegory</th>
-                    <th>Brand Name</th>
+                    <th>Cost price</th>
                     <!-- <th>More</th> -->
                 </tr>
                 </thead>
@@ -40,9 +39,8 @@
                       </td>
                     <td>{{product.product_code}}</td>
                     <td>{{product.product_name}}</td>
-                    <td>{{product.cost_price}}</td>
-                    <td>{{product.category_name}}</td>
-                    <td>{{product.product_brand_name}}</td>
+                     <td>{{product.category_name}}</td>
+                    <td style="text-align:right;">৳ {{product.p_cost_price}}</td>
                     <!-- <td>
                         <b-dropdown right split text="More" class=" custom_more_dropdown">
       <b-dropdown-item>Edit</b-dropdown-item>

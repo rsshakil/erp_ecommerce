@@ -91,6 +91,9 @@ class SellController extends Controller
                     'item_quantity'=>$item['item_quantity'],
                     'item_cost_price'=>$item['cost_price'],
                     'item_selling_price'=>$item['selling_price'],
+                    'item_name'=>$item['product_name'],
+                    'item_img'=>$item['prodcut_image'],
+                    'item_cat'=>$item['category_name'],
                 ]);
                 $stockInfo = CommonService::stockInfo($request->client_id,$item['product_id']);
                 if(!empty($stockInfo)){
@@ -115,10 +118,7 @@ class SellController extends Controller
         try{
             $clientInfo = User::select('users.*','users_details.first_name','users_details.last_name','users_details.phone')->leftJoin('users_details','users_details.user_id','users.id')->where('users.id',$request->client_id)->first();
            $result = SellHistory::join('sells','sell_histories.sell_id','sells.sell_id')
-            ->LeftJoin('products','products.product_id','sell_histories.product_id')
             ->LeftJoin('contacts','contacts.contact_id','sells.contact_id')
-            ->LeftJoin('image_controls','image_controls.product_id','products.product_id')
-            ->LeftJoin('product_categories','product_categories.product_categorie_id','products.category_id')
             ->where('sell_histories.sell_id',$request->sell_id)->groupBy('sell_history_id')->get();
             return response()->json(array('result' => 200,'products'=>$result, 'clientInfo'=>$clientInfo, 'message' => 'Sell history list'));
             

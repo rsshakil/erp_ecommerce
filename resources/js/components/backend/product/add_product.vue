@@ -618,7 +618,7 @@
 
             //getcategory
             loadProductCategoryData() {
-                axios.get(this.BASE_URL + "api/get_all_product_category")
+                axios.get(this.BASE_URL + "api/get_all_product_category?client_id="+Globals.user_info_client_id)
                     .then(({
                         data
                     }) => {
@@ -691,6 +691,7 @@
             this.$v.inputData.$touch();
       if(this.$v.inputData.$error) return
             let formData = new FormData();
+            this.inputData.client_id = Globals.user_info_client_id;
     formData.append('all_inputdata', this.inputData);
      let config = { headers: { 'Content-Type': 'application/json' } }
               axios.post(this.BASE_URL+'/api/add_product_to_db',  this.inputData,
@@ -706,6 +707,9 @@
             })
 
 this.reset();
+this.loadContactData();
+            this.loadProductCategoryData();
+
             
                      }else{
                          console.log(res.data);

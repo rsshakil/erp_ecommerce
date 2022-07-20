@@ -86,6 +86,9 @@ class PurchaseController extends Controller
                     'product_id'=>$item['product_id'],
                     'item_quantity'=>$item['item_quantity'],
                     'item_cost_price'=>$item['cost_price'],
+                    'item_name'=>$item['product_name'],
+                    'item_img'=>$item['prodcut_image'],
+                    'item_cat'=>$item['category_name'],
                 ]);
                 $stockInfo = CommonService::stockInfo($request->client_id,$item['product_id']);
                 if(!empty($stockInfo)){
@@ -125,10 +128,7 @@ class PurchaseController extends Controller
         try{
             $clientInfo = User::select('users.*','users_details.first_name','users_details.last_name','users_details.phone')->leftJoin('users_details','users_details.user_id','users.id')->where('users.id',$request->client_id)->first();
             $result = PurchaseHistory::join('purchases','purchase_histories.purchases_id','purchases.purchases_id')
-            ->LeftJoin('products','products.product_id','purchase_histories.product_id')
             ->LeftJoin('contacts','contacts.contact_id','purchases.contact_id')
-            ->LeftJoin('image_controls','image_controls.product_id','products.product_id')
-            ->LeftJoin('product_categories','product_categories.product_categorie_id','products.category_id')
             ->where('purchase_histories.purchases_id',$request->purchase_id)->groupBy('purchases_history_id')->get();
             return response()->json(array('result' => 200,'products'=>$result, 'clientInfo'=>$clientInfo, 'message' => 'Purchase history list'));
             
@@ -153,14 +153,20 @@ class PurchaseController extends Controller
         try{
             $client_id = $request->client_id;
             $sell_info = $request->info;
+
+            Log::error(print_r('sell_info', true));
+            Log::error(print_r($sell_info, true));
             $i = 0;
             foreach($sell_info as $sales){
+            Log::error(print_r('sales', true));
                 Log::error(print_r($sales, true));
                 $orginal_sell_info = PurchaseHistory::where([
                     'purchases_id'=>$sales['purchases_id'],
                     'product_id'=>$sales['product_id']
                 ])->first();
                 $orginal_sell_info = collect($orginal_sell_info)->toArray();
+            Log::error(print_r('orginal_sell_info', true));
+                
                 Log::error(print_r($orginal_sell_info, true));
                 if($sales['item_quantity']!=$orginal_sell_info['item_quantity']){
                     if($sales['item_quantity']>$orginal_sell_info['item_quantity']){

@@ -33,9 +33,9 @@ class PcategoryController extends Controller
         //return $request->all();
         $search = $request->search;
        $dataSorting = $request->sorting == 'false'?10:$request->sorting;
-        $data =$search == 'false'?product_category::orderBy('product_categorie_id', 'desc')->paginate($dataSorting):product_category::where(function($query) use($search){
+        $data =$search == 'false'?product_category::orderBy('product_categorie_id', 'desc')->where('client_id',$request->client_id)->paginate($dataSorting):product_category::where(function($query) use($search){
             $query->orWhere('category_name', 'LIKE', "%{$search}%");
-        })->orderBy('product_categorie_id', 'desc')->paginate($dataSorting);
+        })->where('client_id',$request->client_id)->orderBy('product_categorie_id', 'desc')->paginate($dataSorting);
       
        return PcategoryResource::collection($data);
     }

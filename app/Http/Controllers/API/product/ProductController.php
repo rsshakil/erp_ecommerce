@@ -138,7 +138,7 @@ class ProductController extends Controller
         $product_info['instruction_list']='';
         $product_info['review_list']=$review_list;
         $product_info['support_list']=$support_list;
-        $product_info['entry_by']=$request->user_id;
+        $product_info['entry_by']=$request->client_id;
 
         $product_info['p_diemension']=$request->singleitem['diemension'];
         $product_info['p_weight']=$request->singleitem['weight'];
