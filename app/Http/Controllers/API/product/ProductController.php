@@ -309,10 +309,7 @@ class ProductController extends Controller
         if($client_id){
             $q->where('products.client_id',$client_id);
         }
-        if($client_id==3 || $client_id==4){
-            $q->orwhere('products.client_id',2);
-            $q->orwhere('products.client_id',2);
-        }
+        
         
         $q->groupBy('products.product_id');
         $result = $q->orderBy('products.product_id','DESC')->get();
