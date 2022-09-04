@@ -3,6 +3,7 @@
 /public/hot
 /public/storage
 /public/js/app.js
+/public/js/frontend_app.js
 public/backend/images/users/*
 public/dashboard/images/*
 
@@ -18,3 +19,5 @@ yarn-error.log
 !.gitkeep
 
 composer.lock
+.htaccess
+
